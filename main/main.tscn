@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlgnsihic5mar"]
+
+[ext_resource type="Script" uid="uid://b24aselm5g5l4" path="res://scripts/laser_2d_with_line.gd" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://bb0os18kg2piv" path="res://main/main.gd" id="1_c651c"]
+[ext_resource type="PackedScene" uid="uid://c4uv1ko5qjic6" path="res://scenes/wall.tscn" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://jc1vf0dkqcc8" path="res://scenes/mirror.tscn" id="3_xwkvk"]
+
+[sub_resource type="Environment" id="Environment_xwkvk"]
+background_mode = 3
+glow_enabled = true
+glow_levels/4 = 0.5
+glow_levels/5 = 0.3
+glow_mix = 0.141
+glow_blend_mode = 1
+glow_hdr_threshold = 0.9
+glow_hdr_scale = 0.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_c651c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -391.0
+offset_top = -361.0
+offset_right = 1551.0
+offset_bottom = 1078.0
+color = Color(0.09375913, 0.09375914, 0.09375914, 1)
+
+[node name="Laser2DWithLine" type="RayCast2D" parent="." groups=["laser"]]
+enabled = false
+target_position = Vector2(230, 79)
+collision_mask = 3
+collide_with_areas = true
+script = ExtResource("1_53q0u")
+
+[node name="Wall" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(960, 341)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Wall2" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(700, 354)
+rotation = -0.6632251
+collision_layer = 3
+collision_mask = 3
+
+[node name="Wall3" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(957.9999, 427.99994)
+rotation = 1.0384709
+scale = Vector2(3.68, 3.68)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Wall4" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(753, 520)
+rotation = -4.2917647
+collision_layer = 3
+collision_mask = 3
+
+[node name="Mirror" parent="." instance=ExtResource("3_xwkvk")]
+position = Vector2(965, 195)
+
+[node name="Mirror2" parent="." instance=ExtResource("3_xwkvk")]
+position = Vector2(128, 562)
+rotation = 1.8203784
+
+[node name="Mirror3" parent="." instance=ExtResource("3_xwkvk")]
+position = Vector2(663, 26.000015)
+rotation = 4.2812924
+
+[node name="Mirror4" parent="." instance=ExtResource("3_xwkvk")]
+position = Vector2(140, 329)
+rotation = 1.8203784
+
+[node name="Mirror5" parent="." instance=ExtResource("3_xwkvk")]
+position = Vector2(477, 141.00003)
+rotation = -2.6424284
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xwkvk")
