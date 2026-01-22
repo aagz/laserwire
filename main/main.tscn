@@ -28,7 +28,7 @@ color = Color(0.09375913, 0.09375914, 0.09375914, 1)
 [node name="Laser2DWithLine" type="RayCast2D" parent="." groups=["laser"]]
 enabled = false
 target_position = Vector2(230, 79)
-collision_mask = 3
+collision_mask = 7
 collide_with_areas = true
 script = ExtResource("1_53q0u")
 
@@ -44,7 +44,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Wall3" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(957.9999, 427.99994)
+position = Vector2(970.00006, 484.0001)
 rotation = 1.0384709
 scale = Vector2(3.68, 3.68)
 collision_layer = 3
@@ -57,23 +57,39 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Mirror" parent="." instance=ExtResource("3_xwkvk")]
-position = Vector2(965, 195)
+position = Vector2(990, 93)
+rotation = -0.2984513
+collision_layer = 1
+collision_mask = 1
 
 [node name="Mirror2" parent="." instance=ExtResource("3_xwkvk")]
-position = Vector2(128, 562)
+position = Vector2(228.99997, 606.99994)
 rotation = 1.8203784
+collision_layer = 1
+collision_mask = 1
 
 [node name="Mirror3" parent="." instance=ExtResource("3_xwkvk")]
 position = Vector2(663, 26.000015)
-rotation = 4.2812924
+rotation = 2.1170843
+collision_layer = 1
+collision_mask = 1
 
 [node name="Mirror4" parent="." instance=ExtResource("3_xwkvk")]
-position = Vector2(140, 329)
-rotation = 1.8203784
+position = Vector2(103.000015, 338)
+rotation = 3.455752
+collision_layer = 1
+collision_mask = 1
 
 [node name="Mirror5" parent="." instance=ExtResource("3_xwkvk")]
 position = Vector2(477, 141.00003)
-rotation = -2.6424284
+rotation = -1.1676253
+collision_layer = 1
+collision_mask = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xwkvk")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(598, 300)
+color = Color(0.30765662, 0.3025587, 9.62615e-08, 1)
+energy = 0.29

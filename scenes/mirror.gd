@@ -23,9 +23,9 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> vo
 			dragging = false
 				
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			rotation += 0.05
+			rotation += 0.025
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			rotation -= 0.05
+			rotation -= 0.025
 			
 
 			
