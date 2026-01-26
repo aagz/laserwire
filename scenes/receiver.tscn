@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cu74qfski1ryg"]
+
+[ext_resource type="Script" uid="uid://gdfruqhpmowy" path="res://scenes/receiver.gd" id="1_w3ywi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edaio"]
+size = Vector2(30.405596, 31.213207)
+
+[node name="Receiver" type="Area2D" unique_id=445243868]
+script = ExtResource("1_w3ywi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1170465675]
+position = Vector2(199, 6)
+rotation = 0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_edaio")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=977238246]
+position = Vector2(0, -0.9714279)
+rotation = 2.3561945
+scale = Vector2(1, 0.9714286)
+points = PackedVector2Array(-25, 0, -25, 26, 25, 26, 25, -24, 0, -24)

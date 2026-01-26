@@ -1,4 +1,6 @@
-extends RayCast2D
+extends Node2D
+
+
 
 var line_core: Line2D
 var line_glow: Line2D
@@ -6,12 +8,18 @@ var impact: Sprite2D
 
 var glow_shader := load("res://shaders/laser_glow.gdshader") as Shader
 
+@onready var raycast = $Laser2DWithLine
+@onready var outline = $Outline
+@onready var core = $Core
+
 const MAX_LEN := 10000.0
 const MAX_BOUNCES := 25
 const EPS := 0.5
 
+const main_color := Color.RED
+
 func _ready() -> void:
-	enabled = true
+	raycast.enabled = true
 	position = Vector2(100, 100)
 
 	# --- Lines ---
@@ -26,8 +34,10 @@ func _ready() -> void:
 	#glow_material.set_shader_parameter("glow_intensity ", 6.0)
 	#glow_material.set_shader_parameter("core_width ", 1.0)
 	#glow_material.set_shader_parameter("core_length ", 1.0) 
+	outline.default_color = main_color
+	core.color = main_color
 
-	for l in [line_glow, line_core]:
+	for l in [line_core]:
 		l.joint_mode = Line2D.LINE_JOINT_ROUND
 		l.begin_cap_mode = Line2D.LINE_CAP_ROUND
 		l.end_cap_mode = Line2D.LINE_CAP_ROUND
@@ -37,17 +47,17 @@ func _ready() -> void:
 
 	# core
 	line_core.width = 3
-	line_core.default_color = Color("d700e0ff")
+	line_core.default_color = main_color
 	var mat_add_core := CanvasItemMaterial.new()
 	mat_add_core.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
 	line_core.material = mat_add_core
 
-	## glow
-	line_glow.width = 8
-	line_glow.default_color = Color("fc8aff4d")
-	var mat_add_glow := CanvasItemMaterial.new()
-	mat_add_glow.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
-	line_glow.material = mat_add_glow
+	### glow
+	#line_glow.width = 8
+	#line_glow.default_color = Color("fc8aff4d")
+	#var mat_add_glow := CanvasItemMaterial.new()
+	#mat_add_glow.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
+	#line_glow.material = mat_add_glow
 
 	# --- Impact sprite ---
 	impact = Sprite2D.new()
@@ -59,6 +69,9 @@ func _ready() -> void:
 	var impact_mat := CanvasItemMaterial.new()
 	impact_mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	impact.material = impact_mat
+
+func hit_receiver(receiver):
+	receiver.on_laser_hit(main_color)
 
 func _physics_process(_dt: float) -> void:
 	var start_origin := global_position
@@ -75,21 +88,27 @@ func _physics_process(_dt: float) -> void:
 
 	for _i in MAX_BOUNCES:
 		global_position = origin
-		target_position = dir * remaining
-		force_raycast_update()
+		raycast.target_position = dir * remaining
+		raycast.force_raycast_update()
 
-		if !is_colliding():
+		if !raycast.is_colliding():
 			last_point = origin + dir * remaining
 			pts.append(last_point)
 			break
 
-		var pt := get_collision_point()
-		var n := get_collision_normal()
+		var pt: Vector2 = raycast.get_collision_point()
+		var n : Vector2 = raycast.get_collision_normal()
 		pts.append(pt)
 		last_point = pt
 
-		var collider := get_collider()
-		if collider == null or !collider.is_in_group("mirror"):
+		var collider : Object = raycast.get_collider()
+		if collider == null:
+			break
+		elif collider.is_in_group("receiver"):
+			print("RECEIVER")
+			hit_receiver(collider)
+			break
+		elif !collider.is_in_group("mirror"):
 			break
 
 		remaining -= origin.distance_to(pt)

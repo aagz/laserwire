@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlgnsihic5mar"]
+[gd_scene format=3 uid="uid://dlgnsihic5mar"]
 
-[ext_resource type="Script" uid="uid://b24aselm5g5l4" path="res://scripts/laser_2d_with_line.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://bb0os18kg2piv" path="res://main/main.gd" id="1_c651c"]
 [ext_resource type="PackedScene" uid="uid://c4uv1ko5qjic6" path="res://scenes/wall.tscn" id="2_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://jc1vf0dkqcc8" path="res://scenes/mirror.tscn" id="3_xwkvk"]
+[ext_resource type="PackedScene" uid="uid://cu74qfski1ryg" path="res://scenes/receiver.tscn" id="5_3wy1v"]
+[ext_resource type="PackedScene" uid="uid://021ohev3oega" path="res://scenes/emitter.tscn" id="5_kfbq2"]
 
 [sub_resource type="Environment" id="Environment_xwkvk"]
 background_mode = 3
@@ -11,85 +12,83 @@ glow_enabled = true
 glow_levels/4 = 0.5
 glow_levels/5 = 0.3
 glow_mix = 0.141
-glow_blend_mode = 1
 glow_hdr_threshold = 0.9
 glow_hdr_scale = 0.0
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1759354059]
 script = ExtResource("1_c651c")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1364391791]
 offset_left = -391.0
 offset_top = -361.0
 offset_right = 1551.0
 offset_bottom = 1078.0
 color = Color(0.09375913, 0.09375914, 0.09375914, 1)
 
-[node name="Laser2DWithLine" type="RayCast2D" parent="." groups=["laser"]]
-enabled = false
-target_position = Vector2(230, 79)
-collision_mask = 7
-collide_with_areas = true
-script = ExtResource("1_53q0u")
-
-[node name="Wall" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+[node name="Wall" parent="." unique_id=561896080 groups=["walls"] instance=ExtResource("2_pjrb6")]
 position = Vector2(960, 341)
 collision_layer = 3
 collision_mask = 3
 
-[node name="Wall2" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+[node name="Wall2" parent="." unique_id=698353644 groups=["walls"] instance=ExtResource("2_pjrb6")]
 position = Vector2(700, 354)
 rotation = -0.6632251
 collision_layer = 3
 collision_mask = 3
 
-[node name="Wall3" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+[node name="Wall3" parent="." unique_id=1256086487 groups=["walls"] instance=ExtResource("2_pjrb6")]
 position = Vector2(970.00006, 484.0001)
 rotation = 1.0384709
 scale = Vector2(3.68, 3.68)
 collision_layer = 3
 collision_mask = 3
 
-[node name="Wall4" parent="." groups=["walls"] instance=ExtResource("2_pjrb6")]
+[node name="Wall4" parent="." unique_id=1230862163 groups=["walls"] instance=ExtResource("2_pjrb6")]
 position = Vector2(753, 520)
 rotation = -4.2917647
 collision_layer = 3
 collision_mask = 3
 
-[node name="Mirror" parent="." instance=ExtResource("3_xwkvk")]
+[node name="Mirror" parent="." unique_id=1722195266 instance=ExtResource("3_xwkvk")]
 position = Vector2(990, 93)
 rotation = -0.2984513
 collision_layer = 1
 collision_mask = 1
 
-[node name="Mirror2" parent="." instance=ExtResource("3_xwkvk")]
+[node name="Mirror2" parent="." unique_id=641525578 instance=ExtResource("3_xwkvk")]
 position = Vector2(228.99997, 606.99994)
 rotation = 1.8203784
 collision_layer = 1
 collision_mask = 1
 
-[node name="Mirror3" parent="." instance=ExtResource("3_xwkvk")]
+[node name="Mirror3" parent="." unique_id=572954750 instance=ExtResource("3_xwkvk")]
 position = Vector2(663, 26.000015)
 rotation = 2.1170843
 collision_layer = 1
 collision_mask = 1
 
-[node name="Mirror4" parent="." instance=ExtResource("3_xwkvk")]
+[node name="Mirror4" parent="." unique_id=66022164 instance=ExtResource("3_xwkvk")]
 position = Vector2(103.000015, 338)
 rotation = 3.455752
 collision_layer = 1
 collision_mask = 1
 
-[node name="Mirror5" parent="." instance=ExtResource("3_xwkvk")]
+[node name="Mirror5" parent="." unique_id=1762605540 instance=ExtResource("3_xwkvk")]
 position = Vector2(477, 141.00003)
 rotation = -1.1676253
 collision_layer = 1
 collision_mask = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=219874185]
 environment = SubResource("Environment_xwkvk")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=615765814]
 position = Vector2(598, 300)
 color = Color(0.30765662, 0.3025587, 9.62615e-08, 1)
 energy = 0.29
+
+[node name="Receiver" parent="." unique_id=297386234 groups=["receiver"] instance=ExtResource("5_3wy1v")]
+top_level = true
+position = Vector2(271, 495)
+
+[node name="Emitter" parent="." unique_id=1576601151 instance=ExtResource("5_kfbq2")]
