@@ -9,16 +9,18 @@ script = ExtResource("1_8mlxh")
 position = Vector2(0.113, 0)
 rotation = 2.3561945
 scale = Vector2(0.66693753, 0.6478821)
-points = PackedVector2Array(-24.26547, -11.882212, -24.26547, 25.225822, 24.505083, 25.225822, 24.505083, -24.979164, -11.542718, -24.979166)
+points = PackedVector2Array(-24.26547, -0.9680829, -24.26547, 25.225822, 24.505083, 25.225822, 24.505083, -24.979164, -0.9404243, -24.979164)
 width = 5.0
+default_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Core" type="Polygon2D" parent="." unique_id=1183064690]
-position = Vector2(-1.9127991, 1.4040029)
+position = Vector2(-2.0000002, 2)
 rotation = 2.3561945
-scale = Vector2(1.1028337, 0.75405526)
+scale = Vector2(1.3021729, 0.89035195)
+color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 polygon = PackedVector2Array(5.8815656, 11.13027, 5.8815656, -12.417208, -10.21887, -12.417208, -10.21887, 11.13027)
 
 [node name="Laser2DWithLine" type="RayCast2D" parent="." unique_id=950069139 groups=["laser"]]

@@ -26,55 +26,57 @@ offset_bottom = 1078.0
 color = Color(0.09375913, 0.09375914, 0.09375914, 1)
 
 [node name="Wall" parent="." unique_id=561896080 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(960, 341)
+position = Vector2(1176, 304)
+scale = Vector2(2.935, 10.805)
 collision_layer = 3
 collision_mask = 3
 
 [node name="Wall2" parent="." unique_id=698353644 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(700, 354)
-rotation = -0.6632251
+position = Vector2(316, 302)
+rotation = -3.8659043
 collision_layer = 3
 collision_mask = 3
 
 [node name="Wall3" parent="." unique_id=1256086487 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(970.00006, 484.0001)
-rotation = 1.0384709
-scale = Vector2(3.68, 3.68)
+position = Vector2(583, -39.000004)
+rotation = 1.5707964
+scale = Vector2(4.395, 16.97)
 collision_layer = 3
 collision_mask = 3
 
 [node name="Wall4" parent="." unique_id=1230862163 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(753, 520)
-rotation = -4.2917647
+position = Vector2(689, 560)
+rotation = -3.7507126
+scale = Vector2(1.655, 1.655)
 collision_layer = 3
 collision_mask = 3
 
 [node name="Mirror" parent="." unique_id=1722195266 instance=ExtResource("3_xwkvk")]
-position = Vector2(990, 93)
-rotation = -0.2984513
+position = Vector2(791.00006, 412)
+rotation = -3.6128316
 collision_layer = 1
 collision_mask = 1
 
 [node name="Mirror2" parent="." unique_id=641525578 instance=ExtResource("3_xwkvk")]
-position = Vector2(228.99997, 606.99994)
-rotation = 1.8203784
+position = Vector2(366, 592)
+rotation = 0.9128072
 collision_layer = 1
 collision_mask = 1
 
 [node name="Mirror3" parent="." unique_id=572954750 instance=ExtResource("3_xwkvk")]
-position = Vector2(663, 26.000015)
-rotation = 2.1170843
+position = Vector2(619, 110)
+rotation = -2.83616
 collision_layer = 1
 collision_mask = 1
 
 [node name="Mirror4" parent="." unique_id=66022164 instance=ExtResource("3_xwkvk")]
-position = Vector2(103.000015, 338)
-rotation = 3.455752
+position = Vector2(202.99997, 57.000008)
+rotation = 5.4105206
 collision_layer = 1
 collision_mask = 1
 
 [node name="Mirror5" parent="." unique_id=1762605540 instance=ExtResource("3_xwkvk")]
-position = Vector2(477, 141.00003)
+position = Vector2(853, 49)
 rotation = -1.1676253
 collision_layer = 1
 collision_mask = 1
@@ -87,8 +89,69 @@ position = Vector2(598, 300)
 color = Color(0.30765662, 0.3025587, 9.62615e-08, 1)
 energy = 0.29
 
+[node name="Wall6" parent="." unique_id=1093858815 groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(-25, 314)
+scale = Vector2(2.935, 10.805)
+collision_layer = 3
+collision_mask = 3
+
 [node name="Receiver" parent="." unique_id=297386234 groups=["receiver"] instance=ExtResource("5_3wy1v")]
 top_level = true
-position = Vector2(271, 495)
+position = Vector2(594, 314)
+scale = Vector2(2, 2)
 
 [node name="Emitter" parent="." unique_id=1576601151 instance=ExtResource("5_kfbq2")]
+position = Vector2(129, 114)
+
+[node name="Emitter2" parent="." unique_id=1447210081 instance=ExtResource("5_kfbq2")]
+position = Vector2(988, 543)
+rotation = -3.1415925
+main_color = Color(0.06524331, 0.5540034, 0.8975503, 1)
+
+[node name="Emitter3" parent="." unique_id=1934734122 instance=ExtResource("5_kfbq2")]
+position = Vector2(988, 114)
+rotation = 3.1415927
+main_color = Color(0.09729246, 0.62578726, 0.47834158, 1)
+
+[node name="Emitter4" parent="." unique_id=1486195005 instance=ExtResource("5_kfbq2")]
+position = Vector2(129, 543)
+main_color = Color(1, 1, 1, 1)
+
+[node name="Wall5" parent="." unique_id=718712869 groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(566.00006, 686)
+rotation = 1.5707964
+scale = Vector2(4.395, 16.97)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Wall7" parent="." unique_id=1269497329 groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(526.335, 394)
+rotation = 1.5707964
+scale = Vector2(1, 1.6)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Wall8" parent="." unique_id=1970067619 groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(489.00006, 314.00003)
+scale = Vector2(2.03, 2.03)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Mirror6" parent="." unique_id=1745219341 instance=ExtResource("3_xwkvk")]
+position = Vector2(857, 225)
+rotation = -1.4590952
+collision_layer = 1
+collision_mask = 1
+
+[node name="Wall9" parent="." unique_id=450258400 groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(707, 316)
+scale = Vector2(2.03, 2.03)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Wall10" parent="." unique_id=421844885 groups=["walls"] instance=ExtResource("2_pjrb6")]
+position = Vector2(669.545, 234.375)
+rotation = 1.5707964
+scale = Vector2(1, 1.6)
+collision_layer = 3
+collision_mask = 3

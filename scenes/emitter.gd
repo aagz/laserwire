@@ -12,15 +12,21 @@ var glow_shader := load("res://shaders/laser_glow.gdshader") as Shader
 @onready var outline = $Outline
 @onready var core = $Core
 
+@onready var laser_id = str(randi())
+
 const MAX_LEN := 10000.0
 const MAX_BOUNCES := 25
 const EPS := 0.5
 
-const main_color := Color.RED
+@export var main_color := Color.RED
+
+
+var current_receiver
 
 func _ready() -> void:
+	
 	raycast.enabled = true
-	position = Vector2(100, 100)
+	#position = Vector2(100, 100)
 
 	# --- Lines ---
 	line_core = Line2D.new()
@@ -69,9 +75,8 @@ func _ready() -> void:
 	var impact_mat := CanvasItemMaterial.new()
 	impact_mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	impact.material = impact_mat
+	impact.modulate = main_color
 
-func hit_receiver(receiver):
-	receiver.on_laser_hit(main_color)
 
 func _physics_process(_dt: float) -> void:
 	var start_origin := global_position
@@ -80,11 +85,12 @@ func _physics_process(_dt: float) -> void:
 	var pts := PackedVector2Array()
 	pts.append(origin)
 
-	var mouse_g := Vector2(200,100) # get_global_mouse_position()
+	var mouse_g := Vector2(global_position.x + 100, global_position.y)# Vector2(200,100) # get_global_mouse_position()
 	var dir := (mouse_g - origin).normalized()
 
 	var remaining := MAX_LEN
 	var last_point := origin
+	
 
 	for _i in MAX_BOUNCES:
 		global_position = origin
@@ -102,11 +108,16 @@ func _physics_process(_dt: float) -> void:
 		last_point = pt
 
 		var collider : Object = raycast.get_collider()
-		if collider == null:
+		if current_receiver and (collider == null or collider.is_in_group("walls")):
+			print(1)
+			current_receiver.laser_exited(laser_id)
+			current_receiver = null
+		elif collider == null:
 			break
 		elif collider.is_in_group("receiver"):
-			print("RECEIVER")
-			hit_receiver(collider)
+			var receiver = collider
+			current_receiver = receiver
+			receiver.laser_entered(laser_id, main_color)
 			break
 		elif !collider.is_in_group("mirror"):
 			break
@@ -127,4 +138,4 @@ func _physics_process(_dt: float) -> void:
 
 	# точка на конце
 	impact.global_position = last_point
-	impact.scale = Vector2.ONE * (0.9 + 0.15 * sin(Time.get_ticks_msec() / 80.0))
+	impact.scale = Vector2.ONE * (0.5 + 0.15 * sin(Time.get_ticks_msec() / 200.0))
