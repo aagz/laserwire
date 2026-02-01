@@ -1,7 +1,5 @@
-extends Node2D
-
-#signal laser_entered(color: Color)
-#signal laser_exited()
+extends Area2D
+class_name Receiver
 
 @onready var outline : Line2D = $Outline
 @onready var core : Polygon2D = $Core
@@ -17,17 +15,17 @@ var lerp_speed := 5.0
 
 func _ready() -> void:
 	outline.default_color = expected_color
+	add_to_group("receiver")
+	collision_layer = Collision.LAYERS["receiver"]
+	
+	monitorable = true
 	 
 
 func _process(delta: float) -> void:
-	if !_incoming_lasers.size():
-		core.color = default_color
-	else:
-		core.color = core.color.lerp(target_color, lerp_speed * delta)
-	
+	core.color = core.color.lerp(target_color, lerp_speed * delta)
 
 func laser_entered(laser_id, color):
-	print(laser_id, color)
+	#print(laser_id, color)
 	_incoming_lasers[laser_id] = color
 	_update_color()
 	
@@ -37,7 +35,7 @@ func laser_exited(laser_id):
 
 func _update_color():
 	var laser_colors = _incoming_lasers.values()
-	target_color = mix_lasers_hsv(laser_colors)
+	target_color = mix_lasers_hsv(laser_colors) 
 
 
 # colors: массив объектов Color

@@ -1,5 +1,5 @@
-extends Node2D
-
+extends Area2D
+class_name Emitter
 
 
 var line_core: Line2D
@@ -20,50 +20,62 @@ const EPS := 0.5
 
 @export var main_color := Color.RED
 
+var lerp_time := randf_range(280,320)
+
 
 var current_receiver
 
 func _ready() -> void:
 	
 	raycast.enabled = true
+	
+	monitorable = true
+	
+	#raycast.collision_layer = Collision.LAYERS["laser"]
+	raycast.collision_mask = Collision.LAYERS["wall"] | Collision.LAYERS["mirror"] | Collision.LAYERS["mirror_reflect"] | Collision.LAYERS["receiver"] | Collision.LAYERS["emitter"]
 	#position = Vector2(100, 100)
 
 	# --- Lines ---
 	line_core = Line2D.new()
+	line_core.z_index = 3
 	line_glow = Line2D.new()
+	line_glow.z_index = 2
 	
-	#var glow_material := ShaderMaterial.new()
-	#glow_material.shader = glow_shader
-	#
-	#line_glow.material = glow_material
-	#
-	#glow_material.set_shader_parameter("glow_intensity ", 6.0)
-	#glow_material.set_shader_parameter("core_width ", 1.0)
-	#glow_material.set_shader_parameter("core_length ", 1.0) 
-	outline.default_color = main_color
-	core.color = main_color
+	
 
-	for l in [line_core]:
+
+	for l in [line_glow, line_core]:
 		l.joint_mode = Line2D.LINE_JOINT_ROUND
 		l.begin_cap_mode = Line2D.LINE_CAP_ROUND
 		l.end_cap_mode = Line2D.LINE_CAP_ROUND
 		l.antialiased = true
 		l.top_level = true
+		
+		#var glow_material := ShaderMaterial.new()
+		#glow_material.shader = glow_shader
+		#
+		#l.material = glow_material
+		#
+		#glow_material.set_shader_parameter("glow_strength",10.5)
+		#glow_material.set_shader_parameter("softness ", 2.5)
+		outline.default_color = main_color
+		core.color = main_color
+		
 		get_parent().call_deferred("add_child", l)
 
 	# core
 	line_core.width = 3
+	line_core.texture_mode = Line2D.LINE_TEXTURE_STRETCH
 	line_core.default_color = main_color
 	var mat_add_core := CanvasItemMaterial.new()
-	mat_add_core.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
+	mat_add_core.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	line_core.material = mat_add_core
 
 	### glow
-	#line_glow.width = 8
-	#line_glow.default_color = Color("fc8aff4d")
-	#var mat_add_glow := CanvasItemMaterial.new()
-	#mat_add_glow.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
-	#line_glow.material = mat_add_glow
+	line_glow.default_color = Color(main_color, 0.1)
+	var mat_add_glow := CanvasItemMaterial.new()
+	mat_add_glow.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	line_glow.material = mat_add_glow
 
 	# --- Impact sprite ---
 	impact = Sprite2D.new()
@@ -77,6 +89,9 @@ func _ready() -> void:
 	impact.material = impact_mat
 	impact.modulate = main_color
 
+func _process(_delta: float) -> void:
+	line_glow.width = 6 + 2 * sin(Time.get_ticks_msec() / lerp_time)
+	line_glow.default_color = Color(main_color, 0.1 + 0.2 * sin(Time.get_ticks_msec() / lerp_time))
 
 func _physics_process(_dt: float) -> void:
 	var start_origin := global_position
@@ -108,8 +123,7 @@ func _physics_process(_dt: float) -> void:
 		last_point = pt
 
 		var collider : Object = raycast.get_collider()
-		if current_receiver and (collider == null or collider.is_in_group("walls")):
-			print(1)
+		if current_receiver and !collider.is_in_group("mirror") and !collider.is_in_group("receiver"):
 			current_receiver.laser_exited(laser_id)
 			current_receiver = null
 		elif collider == null:
@@ -138,4 +152,4 @@ func _physics_process(_dt: float) -> void:
 
 	# точка на конце
 	impact.global_position = last_point
-	impact.scale = Vector2.ONE * (0.5 + 0.15 * sin(Time.get_ticks_msec() / 200.0))
+	impact.scale = Vector2.ONE * (0.4 + 0.15 * sin(Time.get_ticks_msec() / lerp_time))

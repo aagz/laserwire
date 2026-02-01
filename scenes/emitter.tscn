@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dmj4p330dje45" path="res://scenes/emitter.gd" id="1_8mlxh"]
 
-[node name="Emitter" type="Node2D" unique_id=1576601151]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rgli"]
+size = Vector2(21.213207, 21.213207)
+
+[node name="Emitter" type="Area2D" unique_id=247575890]
+z_index = 5
 script = ExtResource("1_8mlxh")
 
 [node name="Outline" type="Line2D" parent="." unique_id=513183643]
 position = Vector2(0.113, 0)
 rotation = 2.3561945
-scale = Vector2(0.66693753, 0.6478821)
+scale = Vector2(0.6669375, 0.64788204)
 points = PackedVector2Array(-24.26547, -0.9680829, -24.26547, 25.225822, 24.505083, 25.225822, 24.505083, -24.979164, -0.9404243, -24.979164)
 width = 5.0
 default_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
@@ -16,15 +20,21 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Core" type="Polygon2D" parent="." unique_id=1183064690]
-position = Vector2(-2.0000002, 2)
-rotation = 2.3561945
-scale = Vector2(1.3021729, 0.89035195)
-color = Color(0.13333334, 0.13333334, 0.13333334, 1)
-polygon = PackedVector2Array(5.8815656, 11.13027, 5.8815656, -12.417208, -10.21887, -12.417208, -10.21887, 11.13027)
-
 [node name="Laser2DWithLine" type="RayCast2D" parent="." unique_id=950069139 groups=["laser"]]
 enabled = false
 target_position = Vector2(148, 0)
 collision_mask = 7
 collide_with_areas = true
+
+[node name="Core" type="Polygon2D" parent="." unique_id=1183064690]
+position = Vector2(-2.0000002, 2)
+rotation = 2.3561945
+scale = Vector2(1.3021729, 0.89035183)
+color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+polygon = PackedVector2Array(5.9732275, 11.91282, 5.9732275, -11.91282, -10.317393, -11.91282, -10.317393, 11.91282)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=175914619]
+position = Vector2(3.427267e-07, -2.9802322e-07)
+rotation = 0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_6rgli")

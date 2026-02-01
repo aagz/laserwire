@@ -6,6 +6,7 @@
 size = Vector2(26.870062, 26.693287)
 
 [node name="Receiver" type="Area2D" unique_id=445243868]
+top_level = true
 script = ExtResource("1_w3ywi")
 
 [node name="Outline" type="Line2D" parent="." unique_id=977238246]

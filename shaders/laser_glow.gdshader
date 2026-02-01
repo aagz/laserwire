@@ -1,18 +1,18 @@
 shader_type canvas_item;
+render_mode blend_add;
 
-uniform float glow_intensity : hint_range(0.0, 50.0) = 6.0;
-uniform float core_width : hint_range(0.0, 1.0) = 0.5;
-uniform float core_length : hint_range(0.0, 1.0) = 0.5;
+uniform float glow_strength : hint_range(0.0, 5.0) = 1.5;
+uniform float softness : hint_range(0.01, 1.0) = 0.25;
 
 void fragment() {
-    float y_dist = abs(UV.y - 0.5);
-    float x_dist = max(0.1, abs(UV.x - 0.5));
+    // расстояние от центра линии (Y = 0.5)
+    float d = abs(UV.y - 0.5) * 2.0;
 
-    float core_y_mask = 1.0 - smoothstep(0.0, core_width, y_dist);
-    float core_x_mask = 1.0 - smoothstep(0.0, core_length, x_dist);
-    float core_mask = core_y_mask * core_x_mask;
-    vec4 core_color = COLOR * glow_intensity;
-    core_color.a = core_mask;
+    // мягкое затухание к краям
+    float glow = smoothstep(1.0, softness, d);
 
-    COLOR = core_color;
+    vec4 col = COLOR;
+    col.rgb *= glow * glow_strength;
+
+    COLOR = col;
 }

@@ -5,19 +5,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvhfp"]
 size = Vector2(20, 72)
 
-[node name="Wall" type="StaticBody2D" unique_id=718712869]
-collision_layer = 4
-collision_mask = 6
-input_pickable = true
+[node name="Wall" type="Area2D" unique_id=920420864]
 script = ExtResource("1_wykyb")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1551390517]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=941181432]
+shape = SubResource("RectangleShape2D_uvhfp")
+
+[node name="Visual" type="Node2D" parent="." unique_id=1515462123]
+
+[node name="ColorRect" type="ColorRect" parent="Visual" unique_id=1493548168]
 offset_left = -10.0
 offset_top = -36.0
 offset_right = 10.0
 offset_bottom = 36.0
-color = Color(0.101960786, 0.7372549, 0.6117647, 1)
+color = Color(0.29803923, 0.29803923, 0.2784314, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=719889025]
-shape = SubResource("RectangleShape2D_uvhfp")
