@@ -1,47 +1,64 @@
 extends Area2D
 class_name Mirror
 
+
+@export var draggable = true
+@export var rotateable = true
+@export var size : Vector2 = Vector2(20, 72):
+	set(value):
+		size = value
+		_apply_size()
+		
 var dragging := false
 var drag_offset := Vector2.ZERO
 
-var wheel_dragging := false
  
 @onready var correct : Node2D = $Visual/Correct
+@onready var correct_color_rect_wall : ColorRect = $Visual/Correct/ColorRect_Wall
+@onready var correct_color_rect_mirror : ColorRect = $Visual/Correct/ColorRect_Mirror
+
 @onready var wrong : Node2D = $Visual/Wrong
+@onready var wrong_color_rect : ColorRect = $Visual/Wrong/ColorRect
 
 @onready var collision_shape : CollisionShape2D = $CollisionShape2D
 
 @onready var reflection_surface : Area2D = $Reflection_Surface
 @onready var mirror_shape : CollisionShape2D = $Reflection_Surface/CollisionShape2D
 
-@onready var rotation_wheel : Area2D = $RotationWheel
-@onready var rotation_shape : CollisionShape2D = $RotationWheel/CollisionShape2D
+@onready var rotation_wheel : RotationWheel = $RotationWheel
+@onready var rotation_wheel_shape : CollisionShape2D = $RotationWheel/CollisionShape2D
 
 
 func _ready() -> void:
-	input_pickable = true
+	var mirror_scale := correct_color_rect_wall.scale
 	
-	for s in [$Visual/Correct/ColorRect_Wall, $Visual/Correct/ColorRect_Mirror, $Visual/Wrong/ColorRect2]:
+	input_pickable = draggable
+	if !rotateable:
+		rotation_wheel.visible = false
+		rotation_wheel.monitoring = false
+		rotation_wheel.monitorable = false
+	
+	for s in [$Visual/Correct/ColorRect_Wall, $Visual/Correct/ColorRect_Mirror, $Visual/Wrong/ColorRect]:
 		s.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 	collision_layer = Collision.LAYERS["mirror"]
 	collision_mask = Collision.LAYERS["wall"] | Collision.LAYERS["emitter"] | Collision.LAYERS["receiver"] | Collision.LAYERS["mirror"]
 	reflection_surface.collision_layer = Collision.LAYERS["mirror_reflect"]
 	reflection_surface.collision_mask = Collision.LAYERS["wall"] | Collision.LAYERS["mirror"]
-	rotation_wheel.collision_layer = 1
-	rotation_wheel.collision_mask = 0
+
 	
 	reflection_surface.add_to_group("mirror")
+	#add_to_group("mirror")
 	
 	monitoring = true
 	
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
 	
-	rotation_wheel.input_pickable = true
-	rotation_wheel.input_event.connect(_on_rotation_wheel_input)
-	rotation_wheel.monitoring = false  # Только input, не area events
-	rotation_shape.disabled = false  # Shape active
+
+		
+	
+
 
 func _on_area_entered(area):
 	print("Collide with ", area.name)
@@ -56,15 +73,30 @@ func _on_area_exited(area):
 	correct.visible = true
 	wrong.visible = false
 	mirror_shape.set_deferred("disabled", false)
-	
-func _on_rotation_wheel_input(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
-	
-	print("Wheel clicked! shape_idx: ", _shape_idx)  # Debug
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		wheel_dragging = event.pressed  # Hold для вращения
-		
-func _draw():
-	draw_arc(Vector2.ZERO, 50, 0, 360, 32, Color(Color.WHITE, 0.05), 1, true)
+
+func _apply_size() -> void:
+	if !is_node_ready(): return
+
+	# ColorRect через офсеты (чтобы оставалось по центру)
+	var hx := size.x * 0.5
+	var hy := size.y * 0.5
+	$Visual/Correct/ColorRect_Wall.offset_left = -hx
+	$Visual/Correct/ColorRect_Wall.offset_right = hx
+	$Visual/Correct/ColorRect_Wall.offset_top = -hy
+	$Visual/Correct/ColorRect_Wall.offset_bottom = hy
+
+	$Visual/Wrong/ColorRect.offset_left = -hx
+	$Visual/Wrong/ColorRect.offset_right = hx
+	$Visual/Wrong/ColorRect.offset_top = -hy
+	$Visual/Wrong/ColorRect.offset_bottom = hy
+
+	# Коллизия корпуса
+	var body := $CollisionShape2D.shape as RectangleShape2D
+	if body: body.size = size
+
+	# Поверхность отражения (пример: фиксируем ширину 8, высоту как у size)
+	var surf := $Reflection_Surface/CollisionShape2D.shape as RectangleShape2D
+	if surf: surf.size = Vector2(8, size.y)
 
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
 	
@@ -78,22 +110,20 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> vo
 			else:
 				dragging = false
 				
-		if Input.is_action_just_released("ui_left_mouse_button"):
-			dragging = false
+
 				
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			rotation += 0.025
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			rotation -= 0.025
 			
-func _process(_dt: float) -> void:
+func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	if Input.is_action_just_released("ui_left_mouse_button"):
+		dragging = false
+		
 	if dragging:
 		var mouse_world: Vector2 = get_canvas_transform().affine_inverse() * get_viewport().get_mouse_position()
 		global_position = mouse_world - drag_offset
 		
-	if wheel_dragging:
-		var wheel_center = rotation_wheel.global_position
-		var mouse_pos = get_global_mouse_position()
-		var angle = wheel_center.angle_to(mouse_pos)
-		rotation = angle - PI/2  # Offset для "look right"
-		print("Wheel rotate to mouse angle:", rad_to_deg(angle))

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cdbn05v8d4tm1"]
+
+[ext_resource type="PackedScene" uid="uid://cbl5rckaixng3" path="res://levels/level_base.tscn" id="1_vn7o3"]
+[ext_resource type="PackedScene" uid="uid://bcahe5l52fnpt" path="res://scenes/mirror/mirror.tscn" id="2_jirdo"]
+[ext_resource type="PackedScene" uid="uid://c4uv1ko5qjic6" path="res://scenes/wall/wall.tscn" id="2_kx6l7"]
+[ext_resource type="PackedScene" uid="uid://021ohev3oega" path="res://scenes/emitter/emitter.tscn" id="3_n46q3"]
+[ext_resource type="PackedScene" uid="uid://cu74qfski1ryg" path="res://scenes/receiver/receiver.tscn" id="4_btoec"]
+
+[node name="Level_1" unique_id=2077575683 instance=ExtResource("1_vn7o3")]
+
+[node name="Mirror" parent="Templates" parent_id_path=PackedInt32Array(1577075236) index="4" unique_id=741473089]
+position = Vector2(173, 116.000015)
+rotation = 4.0439277
+
+[node name="Wall" parent="." index="6" unique_id=920420864 instance=ExtResource("2_kx6l7")]
+position = Vector2(570, 483)
+scale = Vector2(6.04, 4.52)
+
+[node name="EmitterRed" parent="." index="7" unique_id=247575890 instance=ExtResource("3_n46q3")]
+position = Vector2(117.99999, 465)
+rotation = -0.7853982
+main_color = Color(0.9647059, 0.1882353, 0.28627452, 1)
+
+[node name="ReceiverRed" parent="." index="8" unique_id=445243868 instance=ExtResource("4_btoec")]
+position = Vector2(1017, 452.99997)
+expected_color = Color(0.9647059, 0.1882353, 0.28627452, 1)
+
+[node name="Mirror" parent="." index="9" unique_id=2144264494 instance=ExtResource("2_jirdo")]
+position = Vector2(444.00006, 236.00002)
+rotation = -0.7853982

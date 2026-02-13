@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://dxh1wr6lxxa87"]
+
+[ext_resource type="Script" uid="uid://by27ifogl1xlj" path="res://levels/level_0.gd" id="1_c4pne"]
+[ext_resource type="PackedScene" uid="uid://cu74qfski1ryg" path="res://scenes/receiver/receiver.tscn" id="2_tfamw"]
+[ext_resource type="PackedScene" uid="uid://c4uv1ko5qjic6" path="res://scenes/wall/wall.tscn" id="3_dm5o4"]
+[ext_resource type="PackedScene" uid="uid://021ohev3oega" path="res://scenes/emitter/emitter.tscn" id="4_obtcn"]
+[ext_resource type="PackedScene" uid="uid://bcahe5l52fnpt" path="res://scenes/mirror/mirror.tscn" id="5_2ro2b"]
+[ext_resource type="PackedScene" uid="uid://cuucs5hbmc6v6" path="res://scenes/mirror/mirror_wide.tscn" id="6_fj15s"]
+[ext_resource type="Texture2D" uid="uid://gmttprfku7dr" path="res://gb.svg" id="7_p0s0h"]
+[ext_resource type="Texture2D" uid="uid://hx4xvit5b5c1" path="res://ru.svg" id="8_axdoh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4dugh"]
+font_size = 48
+
+[node name="Level_Menu" type="Node2D" unique_id=1445239730]
+script = ExtResource("1_c4pne")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=802500954]
+position = Vector2(576, 323)
+
+[node name="Receiver" parent="." unique_id=445243868 instance=ExtResource("2_tfamw")]
+position = Vector2(999, 300)
+expected_color = Color(0.09803922, 0.627451, 0.47843137, 1)
+
+[node name="Wall" parent="." unique_id=920420864 instance=ExtResource("3_dm5o4")]
+position = Vector2(1176, 304)
+scale = Vector2(2.935, 10.805)
+
+[node name="Wall3" parent="." unique_id=1523343828 instance=ExtResource("3_dm5o4")]
+position = Vector2(583, -39.000004)
+rotation = 1.5707964
+scale = Vector2(4.395, 16.97)
+
+[node name="Wall6" parent="." unique_id=1246210843 instance=ExtResource("3_dm5o4")]
+position = Vector2(-25, 314)
+scale = Vector2(2.935, 10.805)
+
+[node name="EmitterRed" parent="." unique_id=247575890 instance=ExtResource("4_obtcn")]
+position = Vector2(129, 114)
+main_color = Color(0.9647059, 0.1882353, 0.28627452, 1)
+
+[node name="EmitterGreen" parent="." unique_id=508130824 instance=ExtResource("4_obtcn")]
+position = Vector2(129, 563)
+main_color = Color(0.09729246, 0.62578726, 0.47834158, 1)
+
+[node name="Wall5" parent="." unique_id=1495858715 instance=ExtResource("3_dm5o4")]
+position = Vector2(566.00006, 686)
+rotation = 1.5707964
+scale = Vector2(4.395, 16.97)
+
+[node name="Wall8" parent="." unique_id=369854328 instance=ExtResource("3_dm5o4")]
+position = Vector2(582.96, 336.73)
+scale = Vector2(21.655, 4.225)
+
+[node name="Mirror" parent="." unique_id=741473089 instance=ExtResource("5_2ro2b")]
+position = Vector2(981, 108.00007)
+rotation = -0.59864795
+
+[node name="Mirror3" parent="." unique_id=1514604506 instance=ExtResource("5_2ro2b")]
+position = Vector2(275.00003, 288)
+rotation = 5.305801
+
+[node name="MirrorWide" parent="." unique_id=742653635 instance=ExtResource("6_fj15s")]
+position = Vector2(584, 620)
+
+[node name="MirrorWide2" parent="." unique_id=2073983673 instance=ExtResource("6_fj15s")]
+position = Vector2(583, 499)
+rotation = 4.712389
+
+[node name="ReceiverRed" parent="." unique_id=1766824027 instance=ExtResource("2_tfamw")]
+position = Vector2(132, 300)
+expected_color = Color(0.9647059, 0.1882353, 0.28627452, 1)
+
+[node name="Mirror4" parent="." unique_id=74629325 instance=ExtResource("5_2ro2b")]
+position = Vector2(1017.00006, 562.00006)
+rotation = 0.7853982
+
+[node name="Wall9" parent="." unique_id=1884734695 instance=ExtResource("3_dm5o4")]
+position = Vector2(584.375, 3.645)
+scale = Vector2(7.065, 1.56)
+
+[node name="MainMenuContainer" type="Control" parent="." unique_id=312084780]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TranslationButtonsContainer" type="HBoxContainer" parent="MainMenuContainer" unique_id=57735720]
+clip_contents = true
+layout_mode = 0
+offset_left = 520.0
+offset_top = 13.0
+offset_right = 649.0
+offset_bottom = 53.0
+
+[node name="EnButton" type="TextureButton" parent="MainMenuContainer/TranslationButtonsContainer" unique_id=222142445]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_p0s0h")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="RuButton" type="TextureButton" parent="MainMenuContainer/TranslationButtonsContainer" unique_id=1223789429]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("8_axdoh")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainMenuContainer" unique_id=146053302]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 200.0
+offset_right = 754.0
+offset_bottom = 287.0
+text = "Laserwire"
+label_settings = SubResource("LabelSettings_4dugh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsList" type="VBoxContainer" parent="MainMenuContainer" unique_id=483817192]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 324.0
+offset_right = 754.0
+offset_bottom = 449.0
+
+[node name="GameButton" type="Button" parent="MainMenuContainer/ButtonsList" unique_id=1336116000]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Новая игра"
+
+[node name="LevelButton" type="Button" parent="MainMenuContainer/ButtonsList" unique_id=1801579190]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Выбор уровня"
+
+[node name="ExitButton" type="Button" parent="MainMenuContainer/ButtonsList" unique_id=445415355]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Выход"

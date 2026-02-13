@@ -15,7 +15,7 @@ var glow_shader := load("res://shaders/laser_glow.gdshader") as Shader
 @onready var laser_id = str(randi())
 
 const MAX_LEN := 10000.0
-const MAX_BOUNCES := 25
+const MAX_BOUNCES := 100
 const EPS := 0.5
 
 @export var main_color := Color.RED
@@ -34,6 +34,9 @@ func _ready() -> void:
 	#raycast.collision_layer = Collision.LAYERS["laser"]
 	raycast.collision_mask = Collision.LAYERS["wall"] | Collision.LAYERS["mirror"] | Collision.LAYERS["mirror_reflect"] | Collision.LAYERS["receiver"] | Collision.LAYERS["emitter"]
 	#position = Vector2(100, 100)
+	
+	collision_layer = Collision.LAYERS["emitter"]
+	#core.collision_mask = Collision.LAYERS["wall"]
 
 	# --- Lines ---
 	line_core = Line2D.new()
@@ -100,16 +103,17 @@ func _physics_process(_dt: float) -> void:
 	var pts := PackedVector2Array()
 	pts.append(origin)
 
-	var mouse_g := Vector2(global_position.x + 100, global_position.y)# Vector2(200,100) # get_global_mouse_position()
-	var dir := (mouse_g - origin).normalized()
+	var dir := Vector2.RIGHT.rotated(global_rotation)
 
 	var remaining := MAX_LEN
 	var last_point := origin
 	
 
 	for _i in MAX_BOUNCES:
-		global_position = origin
-		raycast.target_position = dir * remaining
+		#global_position = origin
+		raycast.global_position = origin
+		var target_global := origin + dir * remaining
+		raycast.target_position = raycast.to_local(target_global)
 		raycast.force_raycast_update()
 
 		if !raycast.is_colliding():
@@ -135,6 +139,9 @@ func _physics_process(_dt: float) -> void:
 			break
 		elif !collider.is_in_group("mirror"):
 			break
+			
+		print("HIT:", collider.name, " layer=", collider.collision_layer, " groups=", collider.get_groups(), " normal=", n)
+
 
 		remaining -= origin.distance_to(pt)
 		if remaining <= 0.0:
@@ -144,7 +151,7 @@ func _physics_process(_dt: float) -> void:
 		origin = pt + dir * EPS
 
 	# вернуть RayCast2D на место
-	global_position = start_origin
+	#global_position = start_origin
 
 	# применяем точки к линиям
 	line_core.points = pts

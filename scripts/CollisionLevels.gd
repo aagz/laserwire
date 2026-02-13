@@ -1,6 +1,7 @@
 extends Node
 
 const layer_names := [
+	"service",
 	"emitter",
 	"receiver",
 	"laser",

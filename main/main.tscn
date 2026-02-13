@@ -1,11 +1,6 @@
 [gd_scene format=3 uid="uid://dlgnsihic5mar"]
 
 [ext_resource type="Script" uid="uid://bb0os18kg2piv" path="res://main/main.gd" id="1_c651c"]
-[ext_resource type="Script" uid="uid://cbi7s6v557lhs" path="res://levels/level_1.gd" id="2_kfbq2"]
-[ext_resource type="PackedScene" uid="uid://c4uv1ko5qjic6" path="res://scenes/wall.tscn" id="2_pjrb6"]
-[ext_resource type="PackedScene" uid="uid://bcahe5l52fnpt" path="res://scenes/mirror.tscn" id="3_xwkvk"]
-[ext_resource type="PackedScene" uid="uid://cu74qfski1ryg" path="res://scenes/receiver.tscn" id="5_3wy1v"]
-[ext_resource type="PackedScene" uid="uid://021ohev3oega" path="res://scenes/emitter.tscn" id="5_kfbq2"]
 
 [node name="Main" type="Node2D" unique_id=1759354059]
 script = ExtResource("1_c651c")
@@ -18,74 +13,19 @@ offset_bottom = 1222.0
 color = Color(0.1764706, 0.1764706, 0.16470589, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=615765814]
-visible = false
 position = Vector2(598, 300)
 color = Color(0.30765662, 0.3025587, 9.62615e-08, 1)
 energy = 0.29
 
 [node name="LevelContainer" type="Node2D" parent="." unique_id=2013582653]
 
-[node name="Level_1" type="Node2D" parent="LevelContainer" unique_id=1792225419]
-script = ExtResource("2_kfbq2")
-
-[node name="Receiver" parent="LevelContainer/Level_1" unique_id=445243868 groups=["receiver"] instance=ExtResource("5_3wy1v")]
-position = Vector2(594, 314)
-scale = Vector2(2, 2)
-
-[node name="Wall" parent="LevelContainer/Level_1" unique_id=718712869 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(1176, 304)
-scale = Vector2(2.935, 10.805)
-
-[node name="Wall3" parent="LevelContainer/Level_1" unique_id=1712161158 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(583, -39.000004)
-rotation = 1.5707964
-scale = Vector2(4.395, 16.97)
-
-[node name="Wall6" parent="LevelContainer/Level_1" unique_id=1445633868 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(-25, 314)
-scale = Vector2(2.935, 10.805)
-
-[node name="Emitter" parent="LevelContainer/Level_1" unique_id=1576601151 instance=ExtResource("5_kfbq2")]
-position = Vector2(129, 114)
-
-[node name="Emitter2" parent="LevelContainer/Level_1" unique_id=699465861 instance=ExtResource("5_kfbq2")]
-position = Vector2(988, 543)
-rotation = -3.1415925
-main_color = Color(0.06666667, 0.5529412, 0.8980392, 1)
-
-[node name="Emitter3" parent="LevelContainer/Level_1" unique_id=90933704 instance=ExtResource("5_kfbq2")]
-position = Vector2(988, 114)
-rotation = 3.1415927
-main_color = Color(0.09729246, 0.62578726, 0.47834158, 1)
-
-[node name="Emitter4" parent="LevelContainer/Level_1" unique_id=248423606 instance=ExtResource("5_kfbq2")]
-position = Vector2(129, 543)
-main_color = Color(0.9764706, 0.78039217, 0.30980393, 1)
-
-[node name="Wall5" parent="LevelContainer/Level_1" unique_id=837870048 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(566.00006, 686)
-rotation = 1.5707964
-scale = Vector2(4.395, 16.97)
-
-[node name="Wall8" parent="LevelContainer/Level_1" unique_id=1299550964 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(489.00006, 314.00003)
-scale = Vector2(2.03, 2.03)
-
-[node name="Wall9" parent="LevelContainer/Level_1" unique_id=2081025125 groups=["walls"] instance=ExtResource("2_pjrb6")]
-position = Vector2(692, 314)
-scale = Vector2(2.03, 2.03)
-
-[node name="Mirror" parent="LevelContainer/Level_1" unique_id=741473089 instance=ExtResource("3_xwkvk")]
-position = Vector2(574, 116)
-rotation = -0.23038344
-
-[node name="Mirror2" parent="LevelContainer/Level_1" unique_id=545722872 instance=ExtResource("3_xwkvk")]
-position = Vector2(745.00006, 216.99997)
-rotation = -0.23038344
-
 [node name="UI" type="Control" parent="." unique_id=1074919887]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1149.0
 offset_bottom = 646.0
+
+[node name="LevelLoader" type="Control" parent="UI" unique_id=1395547173]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

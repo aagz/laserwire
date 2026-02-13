@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cu74qfski1ryg"]
+
+[ext_resource type="Script" uid="uid://gdfruqhpmowy" path="res://scenes/receiver/receiver.gd" id="1_w3ywi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fwap8"]
+radius = 13.000302
+
+[node name="Receiver" type="Area2D" unique_id=445243868]
+top_level = true
+rotation = 0.7853982
+script = ExtResource("1_w3ywi")
+
+[node name="Outline" type="Line2D" parent="." unique_id=977238246]
+position = Vector2(-0.052, -0.736)
+rotation = 2.3561945
+scale = Vector2(0.7725523, 0.75047946)
+points = PackedVector2Array(-18.790104, -20.729683, -22.673336, -14.067275, -23.967747, -8.737349, -24.061829, -1.0315552, -23.967747, 4.5874677, -22.673336, 11.249875, -20.084515, 16.579803, -15.235352, 21.074413, -11.023641, 23.24221, -5.845998, 24.574692, 0.70222855, 24.671986, 5.8036985, 24.574692, 12.275752, 23.24221, 20.042217, 17.912285, 23.92545, 11.249875, 25.21986, 4.5874677, 25.435642, -0.8413315, 25.21986, -6.0723853, 23.92545, -12.734794, 20.042217, -20.729683, 12.275752, -24.727127, 5.8036985, -26.059608, 0.55332565, -26.183746, -5.845998, -26.059608, -12.318051, -24.727127, -18.790104, -20.729683)
+width = 5.0
+default_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Core" type="Polygon2D" parent="." unique_id=1538220746]
+position = Vector2(-2.9999988, 1.9999998)
+rotation = 2.3561945
+scale = Vector2(1.651519, 1.1292151)
+color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+polygon = PackedVector2Array(3.914256, 8.229515, 5.1252623, 4.6872325, 5.730766, -0.62619257, 5.446272, -3.5387707, 4.519759, -6.825188, 3.914256, -9.481901, 1.4922428, -11.253042, -2.1407766, -12.138613, -6.3792996, -11.253042, -8.195809, -9.481901, -9.406816, -6.825188, -10.01232, -0.62619257, -9.406816, 5.572803, -8.195809, 8.229515, -5.773796, 10.000658, -2.1407766, 10.886229, 2.0977464, 10.000658)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1170465675]
+position = Vector2(0.06249973, -0.062499076)
+rotation = 0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("CircleShape2D_fwap8")

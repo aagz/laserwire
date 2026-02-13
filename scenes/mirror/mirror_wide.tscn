@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cuucs5hbmc6v6"]
+
+[ext_resource type="PackedScene" uid="uid://bcahe5l52fnpt" path="res://scenes/mirror/mirror.tscn" id="1_dumwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dumwh"]
+size = Vector2(8, 425.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a0rh"]
+size = Vector2(20, 432.5)
+
+[node name="MirrorWide" unique_id=741473089 instance=ExtResource("1_dumwh")]
+rotation = 1.5707964
+
+[node name="ColorRect_Wall" parent="Visual/Correct" parent_id_path=PackedInt32Array(31826001) index="0" unique_id=378664962]
+offset_top = -217.0
+offset_bottom = 216.2904
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect_Mirror" parent="Visual/Correct" parent_id_path=PackedInt32Array(31826001) index="1" unique_id=1933425469]
+offset_top = -213.0
+offset_bottom = 212.2904
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" parent="Visual/Wrong" parent_id_path=PackedInt32Array(271550386) index="0" unique_id=1426249070]
+offset_top = -216.6452
+offset_right = 9.736671
+offset_bottom = 216.11853
+
+[node name="Line2D" parent="Visual/Wrong" parent_id_path=PackedInt32Array(271550386) index="1" unique_id=1647236990]
+points = PackedVector2Array(-10.000009, -220.43242, -9.48537e-06, -220.43242, 9.9999895, -220.43242, 10.000009, 218.4189, -10.9999895, 218.4189, -10.000009, -220.43242)
+
+[node name="CollisionShape2D" parent="Reflection_Surface" parent_id_path=PackedInt32Array(1213827787) index="0" unique_id=1803485845]
+position = Vector2(-7, 2.8312206e-07)
+shape = SubResource("RectangleShape2D_dumwh")
+
+[node name="RotationWheel" parent="." index="2" unique_id=1805742042]
+visible = false
+
+[node name="CollisionShape2D" parent="." index="3" unique_id=1406954211]
+visible = false
+position = Vector2(-4.3711225e-08, -0.75)
+shape = SubResource("RectangleShape2D_4a0rh")

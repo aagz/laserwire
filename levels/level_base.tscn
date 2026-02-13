@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cbl5rckaixng3"]
+
+[ext_resource type="PackedScene" uid="uid://c4uv1ko5qjic6" path="res://scenes/wall/wall.tscn" id="1_da5si"]
+[ext_resource type="Script" uid="uid://cl78ox1wq2m0s" path="res://levels/level_base.gd" id="1_ts4ud"]
+[ext_resource type="PackedScene" uid="uid://021ohev3oega" path="res://scenes/emitter/emitter.tscn" id="2_ep22m"]
+[ext_resource type="PackedScene" uid="uid://bcahe5l52fnpt" path="res://scenes/mirror/mirror.tscn" id="3_ts4ud"]
+[ext_resource type="PackedScene" uid="uid://cu74qfski1ryg" path="res://scenes/receiver/receiver.tscn" id="4_jd1fy"]
+[ext_resource type="PackedScene" uid="uid://cuucs5hbmc6v6" path="res://scenes/mirror/mirror_wide.tscn" id="5_ep22m"]
+
+[node name="Level_Base" type="Node2D" unique_id=2077575683]
+script = ExtResource("1_ts4ud")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1979444948]
+position = Vector2(576, 323)
+
+[node name="Templates" type="Node2D" parent="." unique_id=1577075236]
+
+[node name="EmitterRed" parent="Templates" unique_id=247575890 instance=ExtResource("2_ep22m")]
+position = Vector2(1620, 123)
+main_color = Color(0.9647059, 0.1882353, 0.28627452, 1)
+
+[node name="Wall" parent="Templates" unique_id=920420864 instance=ExtResource("1_da5si")]
+position = Vector2(2046.0001, 255)
+scale = Vector2(6.04, 1.735)
+
+[node name="MirrorWide" parent="Templates" unique_id=35077103 instance=ExtResource("5_ep22m")]
+position = Vector2(1758, 401)
+
+[node name="ReceiverRed" parent="Templates" unique_id=445243868 instance=ExtResource("4_jd1fy")]
+position = Vector2(1824, 123.00006)
+expected_color = Color(0.9647059, 0.1882353, 0.28627452, 1)
+
+[node name="Mirror" parent="Templates" unique_id=741473089 instance=ExtResource("3_ts4ud")]
+position = Vector2(577, 92)
+rotation = -0.59864795
+
+[node name="WallLeft" parent="." unique_id=1899704368 instance=ExtResource("1_da5si")]
+position = Vector2(1176, 304)
+scale = Vector2(2.935, 10.805)
+
+[node name="WallTop" parent="." unique_id=484680063 instance=ExtResource("1_da5si")]
+position = Vector2(583, -39.000004)
+rotation = 1.5707964
+scale = Vector2(4.395, 16.97)
+
+[node name="WallRight" parent="." unique_id=2076820774 instance=ExtResource("1_da5si")]
+position = Vector2(-25, 314)
+scale = Vector2(2.935, 10.805)
+
+[node name="WallBottom" parent="." unique_id=1464059742 instance=ExtResource("1_da5si")]
+position = Vector2(566.00006, 686)
+rotation = 1.5707964
+scale = Vector2(4.395, 16.97)
